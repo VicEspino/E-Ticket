@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="737.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Principal">
@@ -22,19 +26,47 @@
             </Label>
          </children>
       </AnchorPane>
-      <JFXTabPane layoutX="-6.0" layoutY="84.0" prefHeight="654.0" prefWidth="1159.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="84.0">
-         <tabs>
-            <Tab text="Tickets">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-            <Tab text="Resúmen Ticket">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
+      <GridPane gridLinesVisible="true" hgap="15.0" layoutX="14.0" layoutY="95.0" prefHeight="628.0" prefWidth="1121.0" style="-fx-background-color: orange;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="95.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: red;">
+               <children>
+                  <JFXTreeTableView fx:id="table_tickets" prefHeight="145.0" prefWidth="72.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TreeTableColumn prefWidth="75.0" text="No. Ticket" />
+                        <TreeTableColumn prefWidth="108.55999755859375" text="ID Cliente" />
+                        <TreeTableColumn prefWidth="111.24798583984375" text="Fecha" />
+                        <TreeTableColumn prefWidth="102.0" text="Hora" />
+                        <TreeTableColumn prefWidth="155.0" text="Total" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </JFXTreeTableView>
+               </children></AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: blue;" GridPane.columnIndex="1">
+               <children>
+                  <JFXTreeTableView fx:id="table_resumen_ticket" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TreeTableColumn prefWidth="74.0" text="ID Atículo" />
+                        <TreeTableColumn prefWidth="238.3394775390625" text="Nombre" />
+                        <TreeTableColumn prefWidth="77.67041015625" text="Cantidad" />
+                        <TreeTableColumn prefWidth="85.632080078125" text="\$ Individual" />
+                        <TreeTableColumn prefWidth="72.0" text="Total" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </JFXTreeTableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
