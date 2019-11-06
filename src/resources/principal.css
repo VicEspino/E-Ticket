@@ -1,0 +1,90 @@
+*{
+    -boton-color: #5AB444;
+    -boton-color-focused: #5AB44430;
+    -borde-text-field: #29156E;
+    -borde-text-field-focus: #29156E30;
+    -label-color-1: #707070;
+    -label-color-2: #E3E3E3;
+    -color-blanco :#FFFFFF;
+}
+
+/*******************************************************************************
+     *
+     * I will provide this
+     * Tables                                      *
+     *                                                                             *
+     ******************************************************************************/
+.table-view, .tree-table-view {
+    /* Constants used throughout the tableview. */
+    -fx-table-header-border-color: -label-color-2;
+    -fx-table-cell-border-color: -label-color-2; /* Horizontal Lines*/
+    -fx-background-color: -label-color-2;
+}
+
+/* The column header row is made up of a number of column-header, one for each
+   TableColumn, and a 'filler' area that extends from the right-most column
+   to the edge of the tableview, or up to the 'column control' button. */
+.table-view .filler,
+.tree-table-view .filler,
+.table-view .column-header,
+.tree-table-view .column-header {
+    -fx-size: 10;
+    /*-fx-border-style: null;*/
+    -fx-border-color: -label-color-2;
+    -fx-border-width: 0 0.5 0.5 0.5;
+    -fx-background-color: -boton-color ;
+}
+
+.table-view .show-hide-columns-button,
+.tree-table-view .show-hide-columns-button
+{
+    -fx-background-color:-label-color-2 ;
+}
+/*.tree-table-view:focused .tree-table-row-cell:selected {
+     -fx-background-color: #FB260A ;
+     -fx-table-cell-border-color: #FB260A  ;
+}*/
+.table-view .column-header .label,
+.table-view .filler .label,
+.table-view .column-drag-header .label,
+.tree-table-view .column-header .label,
+.tree-table-view .filler .label,
+.tree-table-view .column-drag-header .label
+{
+    -fx-alignment: CENTER;
+    -fx-text-fill: -color-blanco;
+}
+
+.table-view .column-header-background,
+.tree-table-view .column-header-background
+{
+    -fx-background-color:-label-color-1;
+}
+
+.table-row-cell, .tree-table-row-cell {
+    -fx-cell-size: 30px;
+}
+
+
+.table-cell {
+    -fx-border-color: -label-color-1 ; /* Vertical Lines*/
+    -fx-border-width: 1;
+}
+/*Vic xd*/
+.tree-table-cell {
+    -fx-alignment: center ;
+}
+.tree-table-cell:hover{
+
+    /*  -fx-background-color: derive(red,50%);*/
+
+}
+/* este no da el hover, no sé por que xd, pero el tree-table-row-cell sí.
+.table-row-cell:hover{
+   -fx-background-color: derive(red,50%);
+
+}*/
+.tree-table-row-cell:hover{
+    -fx-background-color: derive(#29156E,99%);
+
+}
