@@ -3,16 +3,25 @@ package controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
+import interfaces.ITransferirObjeto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import models.ResumenArticulo;
 import models.Ticket;
+
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
@@ -108,6 +117,41 @@ public class Principal implements Initializable {
 
     @FXML
     void btnAdd_OnAction(ActionEvent event) {
+        Stage secundary = new Stage();
+        Parent root ;
+//no puedes obetenr el controller (creo).
+           /* root = FXMLLoader.load(getClass().getResource("/views/AddTicket_ventana.fxml"));
+            secundary.setTitle("Nueva venta");
+            secundary.setScene(new Scene(root));
+            secundary.initOwner(this.btn_Add.getScene().getWindow());
+            secundary.initModality(Modality.WINDOW_MODAL);
+            secundary.resizableProperty().set(false);
+            secundary.show();
+*/
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AddTicket_ventana.fxml"));
+        try {
+            AnchorPane vent = loader.load();
+            secundary.setScene(new Scene(vent));
+            controllers.AddTicket controller = loader.getController();
+
+            controller.setTransferirObjeto(new ITransferirObjeto() {
+                @Override
+                public void tranferirObjeto(/*TODO Debe llegar el resumen de ticket*/) {
+                    Ticket ticketw = new Ticket(981,589,new Date(156456), new Time(1315), 45.12f);
+                    listaTickets.add(ticketw);
+                }
+            });
+
+            secundary.setTitle("Nueva venta");
+            secundary.initOwner(this.btn_Add.getScene().getWindow());
+            secundary.initModality(Modality.WINDOW_MODAL);
+            secundary.resizableProperty().set(false);
+            secundary.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
