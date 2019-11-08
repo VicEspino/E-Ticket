@@ -2,18 +2,18 @@ package models;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-public class ResumenTicket extends RecursiveTreeObject<ResumenTicket> {
+public class ResumenArticulo extends RecursiveTreeObject<ResumenArticulo> {
 
-    int idArticulo;
-    String nombre;
-    int cantidad;
-    float precioIndividual;
-    float totalTicket;
+    private int idArticulo;
+    private String nombreArticulo;
+    private int cantidad;
+    private float precioIndividual;
+    private float totalTicket;
 
 
-    public ResumenTicket(int idArticulo, String nombre, int cantidad, float precioIndividual, float totalTicket) {
+    public ResumenArticulo(int idArticulo, String nombreArticulo, int cantidad, float precioIndividual, float totalTicket) {
         this.idArticulo = idArticulo;
-        this.nombre = nombre;
+        this.nombreArticulo = nombreArticulo;
         this.cantidad = cantidad;
         this.precioIndividual = precioIndividual;
         this.totalTicket = totalTicket;
@@ -27,12 +27,12 @@ public class ResumenTicket extends RecursiveTreeObject<ResumenTicket> {
         this.idArticulo = idArticulo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreArticulo() {
+        return nombreArticulo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreArticulo(String nombreArticulo) {
+        this.nombreArticulo = nombreArticulo;
     }
 
     public int getCantidad() {

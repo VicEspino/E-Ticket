@@ -7,11 +7,11 @@ import java.sql.Time;
 
 public class Ticket extends RecursiveTreeObject<Ticket> {
 
-    int idTicket;
-    int idCliente;
-    Date fecha;
-    Time hora;
-    float totalTicket;
+    private int idTicket;
+    private int idCliente;
+    private Date fecha;
+    private Time hora;
+    private float totalTicket;
 
     public Ticket(int idTicket, int idCliente, Date fecha, Time hora, float totalTicket) {
         this.idTicket = idTicket;
@@ -37,16 +37,16 @@ public class Ticket extends RecursiveTreeObject<Ticket> {
         this.idCliente = idCliente;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getFecha() {
+        return fecha.toString();
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public Time getHora() {
-        return hora;
+    public String getHora() {
+        return hora.toString();
     }
 
     public void setHora(Time hora) {
