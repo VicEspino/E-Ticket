@@ -105,8 +105,8 @@ public class Principal implements Initializable {
         column_individual.setCellValueFactory(new TreeItemPropertyValueFactory<>("precioIndividual"));
         column_total_articulo.setCellValueFactory(new TreeItemPropertyValueFactory<>("totalTicket"));
 
-        ResumenArticulo resumenArticulo = new ResumenArticulo(123, "Sabritas", 12, 12.3f, 1234.13f);
-        ResumenArticulo resumenArticulo2 = new ResumenArticulo(12, "Sincronizada con carne de hamburger.", 2, 36.0f, 1234.13f);
+        ResumenArticulo resumenArticulo = new ResumenArticulo(1, 2);
+        ResumenArticulo resumenArticulo2 = new ResumenArticulo(5, 5645);
 
         listaArticulos.addAll(resumenArticulo,resumenArticulo2);
         TreeItem<ResumenArticulo> root2 = new RecursiveTreeItem<>(listaArticulos, (recursiveTreeObject) -> recursiveTreeObject.getChildren());

@@ -4,35 +4,13 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 public class ResumenArticulo extends RecursiveTreeObject<ResumenArticulo> {
 
-    private int idArticulo;
-    private String nombreArticulo;
+
     private int cantidad;
-    private float precioIndividual;
-    private float totalTicket;
+    private float totalProducto;
 
-
-    public ResumenArticulo(int idArticulo, String nombreArticulo, int cantidad, float precioIndividual, float totalTicket) {
-        this.idArticulo = idArticulo;
-        this.nombreArticulo = nombreArticulo;
+    public ResumenArticulo(int cantidad, float totalProducto) {
         this.cantidad = cantidad;
-        this.precioIndividual = precioIndividual;
-        this.totalTicket = totalTicket;
-    }
-
-    public int getIdArticulo() {
-        return idArticulo;
-    }
-
-    public void setIdArticulo(int idArticulo) {
-        this.idArticulo = idArticulo;
-    }
-
-    public String getNombreArticulo() {
-        return nombreArticulo;
-    }
-
-    public void setNombreArticulo(String nombreArticulo) {
-        this.nombreArticulo = nombreArticulo;
+        this.totalProducto = totalProducto;
     }
 
     public int getCantidad() {
@@ -43,19 +21,11 @@ public class ResumenArticulo extends RecursiveTreeObject<ResumenArticulo> {
         this.cantidad = cantidad;
     }
 
-    public float getPrecioIndividual() {
-        return precioIndividual;
+    public float getTotalProducto() {
+        return totalProducto;
     }
 
-    public void setPrecioIndividual(float precioIndividual) {
-        this.precioIndividual = precioIndividual;
-    }
-
-    public float getTotalTicket() {
-        return totalTicket;
-    }
-
-    public void setTotalTicket(float totalTicket) {
-        this.totalTicket = totalTicket;
+    public void setTotalProducto(float totalProducto) {
+        this.totalProducto = totalProducto;
     }
 }
