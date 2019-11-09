@@ -75,12 +75,20 @@ public class AddTicket implements Initializable {
         table_resumen_ticket.setRoot(root);
         table_resumen_ticket.setShowRoot(false);
 
-       // column_nombre.setCellValueFactory(new TreeItemPropertyValueFactory<>("nombre"));
+       // busca el metodo get, con ese nombre.<3
+        column_IDArticulo.setCellValueFactory(new TreeItemPropertyValueFactory<>("IDArticulo"));
         column_cantidad.setCellValueFactory(new TreeItemPropertyValueFactory<>("cantidad"));
+        column_nombre.setCellValueFactory(new TreeItemPropertyValueFactory<>("NombreProducto"));
+        column_individual.setCellValueFactory(new TreeItemPropertyValueFactory<>("PrecioIndividualProducto"));
+        column_total_articulo.setCellValueFactory(new TreeItemPropertyValueFactory<>("TotalProducto"));
+
+
+
 
         this.list_productos =  FXCollections.observableArrayList();
-        this.list_productos.add(new Producto(1, "quesadilla", 45.6f));
-        this.list_productos.add(new Producto(2, "quesadilla 2", 21.6f));
+        this.list_productos.add(new Producto(1, "Sincronizada", 25f));
+        this.list_productos.add(new Producto(2, "Sincronizada carne Hamburguesa", 35f));
+        this.list_productos.add(new Producto(2, "Birria de la esquina", 45f));
 
         this.cb_Producto.setItems(crearStrings());
     }
@@ -97,14 +105,17 @@ public class AddTicket implements Initializable {
 
     @FXML
     void btnArticulo_OnAction(ActionEvent event) {
-
+        int idTicketNuevo = 324;
         int cantidad = Integer.parseInt( txtCantidad.getText() );
         int idProducto = cb_Producto.getSelectionModel().getSelectedIndex();
         Producto productoSelected = list_productos.get(idProducto);
 
 
-        ResumenArticulo resumenArticulo = new ResumenArticulo(cantidad,cantidad * productoSelected.getPrecio() );
+        ResumenArticulo resumenArticulo = new ResumenArticulo(idTicketNuevo,productoSelected ,cantidad);
         listProductosComprados.add(resumenArticulo);
+
+        txtCantidad.clear();
+        cb_Producto.getSelectionModel().clearSelection();
 
     }
 
@@ -112,7 +123,7 @@ public class AddTicket implements Initializable {
     @FXML
     void btnEliminar_Clic(ActionEvent event) {
 
-
+        listProductosComprados.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
 
     }
 
