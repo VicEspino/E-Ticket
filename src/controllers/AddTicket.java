@@ -52,6 +52,8 @@ public class AddTicket implements Initializable {
 
     @FXML
     private TreeTableColumn<Producto, String> column_total_articulo;
+    @FXML
+    private Label lblTotalCompra;
 
     @FXML
     private JFXButton btn_Add;
@@ -59,11 +61,18 @@ public class AddTicket implements Initializable {
     @FXML
     private JFXButton btn_Cancel;
 
+    @FXML
+    private JFXTextField txtIDCliente;
+
     private ITransferirObjeto objetoTransferido;
 
     private ObservableList<Producto> list_productos ;
 
     private ObservableList<ResumenArticulo> listProductosComprados;
+
+    private int IDCompra;
+
+    private int IDCliente;
 
 
 
@@ -88,9 +97,11 @@ public class AddTicket implements Initializable {
         this.list_productos =  FXCollections.observableArrayList();
         this.list_productos.add(new Producto(1, "Sincronizada", 25f));
         this.list_productos.add(new Producto(2, "Sincronizada carne Hamburguesa", 35f));
-        this.list_productos.add(new Producto(2, "Birria de la esquina", 45f));
+        this.list_productos.add(new Producto(3, "Birria de la esquina", 45f));
 
         this.cb_Producto.setItems(crearStrings());
+
+
     }
 
     private ObservableList<String> crearStrings() {
@@ -117,6 +128,8 @@ public class AddTicket implements Initializable {
         txtCantidad.clear();
         cb_Producto.getSelectionModel().clearSelection();
 
+
+        this.lblTotalCompra.setText(calcularTotalCompra()  + "");
     }
 
 
@@ -124,6 +137,7 @@ public class AddTicket implements Initializable {
     void btnEliminar_Clic(ActionEvent event) {
 
         listProductosComprados.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
+        this.lblTotalCompra.setText(calcularTotalCompra()  + "");
 
     }
 
@@ -131,7 +145,8 @@ public class AddTicket implements Initializable {
     @FXML
     void btnAdd_OnAction(ActionEvent event) {
         if(objetoTransferido!=null){
-            objetoTransferido.tranferirObjeto();
+            int idCliente = Integer.parseInt(txtIDCliente.getText());
+            objetoTransferido.tranferirObjeto(this.IDCompra,idCliente,this.calcularTotalCompra(),this.listProductosComprados);
             btn_Cancel.fire();
         }
 
@@ -149,5 +164,12 @@ public class AddTicket implements Initializable {
 
     }
 
+    public float calcularTotalCompra(){
+        float total = 0;
+        for(ResumenArticulo resumenArticulo : listProductosComprados){
+            total += resumenArticulo.getTotalProducto();
+        }
 
+        return total;
+    }
 }

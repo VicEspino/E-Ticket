@@ -1,6 +1,7 @@
 package models;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -12,13 +13,15 @@ public class Ticket extends RecursiveTreeObject<Ticket> {
     private Date fecha;
     private Time hora;
     private float totalTicket;
+    ObservableList<ResumenArticulo> listProductosComprados;
 
-    public Ticket(int idTicket, int idCliente, Date fecha, Time hora, float totalTicket) {
+    public Ticket(int idTicket, int idCliente, Date fecha, Time hora, float totalTicket, ObservableList<ResumenArticulo> listProductosComprados) {
         this.idTicket = idTicket;
         this.idCliente = idCliente;
         this.fecha = fecha;
         this.hora = hora;
         this.totalTicket = totalTicket;
+        this.listProductosComprados = listProductosComprados;
     }
 
     public int getIdTicket() {
@@ -59,5 +62,13 @@ public class Ticket extends RecursiveTreeObject<Ticket> {
 
     public void setTotalTicket(float totalTicket) {
         this.totalTicket = totalTicket;
+    }
+
+    public ObservableList<ResumenArticulo> getListProductosComprados() {
+        return listProductosComprados;
+    }
+
+    public void setListProductosComprados(ObservableList<ResumenArticulo> listProductosComprados) {
+        this.listProductosComprados = listProductosComprados;
     }
 }

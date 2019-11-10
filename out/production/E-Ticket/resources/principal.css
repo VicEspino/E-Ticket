@@ -1,5 +1,6 @@
 *{
-    -boton-color: #5AB444;
+    /*-boton-color: #5AB444;*/
+    -boton-color: #FF6616;
     -boton-color-focused: #5AB44430;
     -borde-text-field: #29156E;
     -borde-text-field-focus: #29156E30;
@@ -32,7 +33,7 @@
     /*-fx-border-style: null;*/
     -fx-border-color: -label-color-2;
     -fx-border-width: 0 0.5 0.5 0.5;
-    -fx-background-color: -boton-color ;
+    -fx-background-color: derive(-boton-color,19% );
 }
 
 .table-view .show-hide-columns-button,
@@ -85,6 +86,10 @@
 
 }*/
 .tree-table-row-cell:hover{
-    -fx-background-color: derive(#29156E,99%);
+    -fx-background-color: derive(-boton-color,55% );
 
+}
+
+.tree-table-row-cell:selected {
+    -fx-background-color: derive(-boton-color,40% );
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="712.0" prefWidth="573.0" stylesheets="@../resources/principal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddTicket">
+<AnchorPane prefHeight="743.0" prefWidth="573.0" stylesheets="@../resources/principal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddTicket">
    <children>
       <AnchorPane layoutY="1.0" prefHeight="61.0" prefWidth="573.0" style="-fx-background-color: #FF6616;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -38,8 +38,8 @@
             <Font name="Leelawadee" size="28.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="cb_Producto" labelFloat="true" layoutX="19.0" layoutY="179.0" prefHeight="25.0" prefWidth="246.0" promptText="Producto" AnchorPane.leftAnchor="12.0" />
-      <JFXTextField fx:id="txtCantidad" labelFloat="true" layoutX="288.0" layoutY="179.0" promptText="Cantidad" />
+      <JFXComboBox fx:id="cb_Producto" focusColor="#ff6616" labelFloat="true" layoutX="19.0" layoutY="179.0" prefHeight="25.0" prefWidth="246.0" promptText="Producto" AnchorPane.leftAnchor="12.0" />
+      <JFXTextField fx:id="txtCantidad" focusColor="#ff6616" labelFloat="true" layoutX="288.0" layoutY="179.0" promptText="Cantidad" />
       <JFXButton fx:id="btnArticulo" layoutX="438.0" layoutY="179.0" onAction="#btnArticulo_OnAction" prefHeight="25.0" prefWidth="135.0" text="Añadir articulo" />
       <JFXButton fx:id="btnEliminar" layoutX="438.0" layoutY="204.0" onAction="#btnEliminar_Clic" prefHeight="25.0" prefWidth="135.0" text="Eliminar articulo" />
       <JFXTreeTableView fx:id="table_resumen_ticket" layoutX="13.0" layoutY="243.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
@@ -63,5 +63,16 @@
             <Insets bottom="5.0" left="12.0" right="12.0" top="5.0" />
          </padding>
       </HBox>
+      <Label layoutX="12.0" layoutY="643.0" prefHeight="50.0" prefWidth="92.0" text="Total: $" textFill="#5e5e5e">
+         <font>
+            <Font name="Leelawadee" size="28.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTotalCompra" contentDisplay="CENTER" layoutX="104.0" layoutY="643.0" prefHeight="50.0" prefWidth="463.0" text="0.0" textFill="#5e5e5e">
+         <font>
+            <Font name="Leelawadee" size="28.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtIDCliente" focusColor="#ff6616" labelFloat="true" layoutX="423.0" layoutY="109.0" promptText="ID Cliente" />
    </children>
 </AnchorPane>

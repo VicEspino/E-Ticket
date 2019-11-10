@@ -1,10 +1,10 @@
 package models;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-
+//Compra has Producto
 public class ResumenArticulo extends RecursiveTreeObject<ResumenArticulo> {
 
-    //Compra has Producto
+
     private Producto producto;
     private int idTicket;
 
