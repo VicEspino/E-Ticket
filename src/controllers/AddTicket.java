@@ -1,5 +1,6 @@
 package controllers;
 
+import SQL.SQLReadProducto;
 import com.jfoenix.controls.*;
 import interfaces.ITransferirObjeto;
 import javafx.collections.FXCollections;
@@ -74,7 +75,7 @@ public class AddTicket implements Initializable {
 
     private int IDCliente;
 
-
+    SQLReadProducto sqlReadProducto = new SQLReadProducto();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -94,10 +95,10 @@ public class AddTicket implements Initializable {
 
 
 
-        this.list_productos =  FXCollections.observableArrayList();
-        this.list_productos.add(new Producto(1, "Sincronizada", 25f));
-        this.list_productos.add(new Producto(2, "Sincronizada carne Hamburguesa", 35f));
-        this.list_productos.add(new Producto(3, "Birria de la esquina", 45f));
+        this.list_productos =  sqlReadProducto.getProductos();//FXCollections.observableArrayList();
+        //this.list_productos.add(new Producto(1, "Sincronizada", 25f));
+        //this.list_productos.add(new Producto(2, "Sincronizada carne Hamburguesa", 35f));
+        //this.list_productos.add(new Producto(3, "Birria de la esquina", 45f));
 
         this.cb_Producto.setItems(crearStrings());
 

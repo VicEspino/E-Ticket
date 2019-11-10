@@ -1,5 +1,7 @@
 package controllers;
 
+import SQL.ConexionSQL;
+import SQL.SQLReadProducto;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -22,6 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.ResumenArticulo;
 import models.Ticket;
+import resources.RecursosStatics;
 
 import java.io.IOException;
 import java.net.URL;
@@ -81,11 +84,16 @@ public class Principal implements Initializable {
     @FXML
     private JFXButton btn_Cancel;
 
+    @FXML
+    private JFXButton btn_Productos;
 
-
+    private ConexionSQL conexionSQL = new ConexionSQL();
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //si da null, controlar.
+
+        RecursosStatics.connection = conexionSQL.getConexion();
 
         column_noTicket.setCellValueFactory(new TreeItemPropertyValueFactory<>("IdTicket"));
         column_IDCliente.setCellValueFactory(new TreeItemPropertyValueFactory<>("IdCliente"));
@@ -191,6 +199,29 @@ public class Principal implements Initializable {
 
     }
 
+    @FXML
+    void btnProductos_OnAction(ActionEvent event) {
+        Stage secundary = new Stage();
+        Parent root ;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Productos_ventana.fxml"));
+        try {
+            AnchorPane vent = loader.load();
+            secundary.setScene(new Scene(vent));
+            controllers.Productos controller = loader.getController();
+            controller.setProductos(new SQLReadProducto().getProductos());
+
+            secundary.setTitle("Productos");
+            secundary.initOwner(this.btn_Add.getScene().getWindow());
+            secundary.initModality(Modality.WINDOW_MODAL);
+            secundary.resizableProperty().set(false);
+            secundary.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
 }

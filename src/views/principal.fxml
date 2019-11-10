@@ -71,11 +71,19 @@
             </AnchorPane>
          </children>
       </GridPane>
-      <HBox layoutX="31.0" layoutY="612.0" prefHeight="60.0" prefWidth="159.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox layoutX="31.0" layoutY="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <JFXButton fx:id="btn_Config" onAction="#btnConfig_OnAction" prefHeight="60.0" prefWidth="100.0" text="Configuración" />
             <JFXButton fx:id="btn_Add" onAction="#btnAdd_OnAction" prefHeight="60.0" prefWidth="100.0" text="Añadir" />
             <JFXButton fx:id="btn_Cancel" onAction="#btnCancel_OnAction" prefHeight="60.0" prefWidth="100.0" text="Cancelar" />
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="12.0" right="12.0" top="5.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="1000.0" layoutY="613.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <JFXButton fx:id="btn_Config" onAction="#btnConfig_OnAction" prefHeight="60.0" prefWidth="100.0" text="Configuración" />
+            <JFXButton fx:id="btn_Productos" onAction="#btnProductos_OnAction" prefHeight="60.0" prefWidth="100.0" text="Productos" />
          </children>
          <padding>
             <Insets bottom="5.0" left="12.0" right="12.0" top="5.0" />
