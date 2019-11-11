@@ -137,9 +137,9 @@ public class AddTicket implements Initializable {
     @FXML
     void btnEliminar_Clic(ActionEvent event) {
 
-        listProductosComprados.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
-        this.lblTotalCompra.setText(calcularTotalCompra()  + "");
-
+        //listProductosComprados.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
+        //this.lblTotalCompra.setText(calcularTotalCompra()  + "");
+        listProductosComprados.get(0).setCantidad(999);
     }
 
 
@@ -147,7 +147,9 @@ public class AddTicket implements Initializable {
     void btnAdd_OnAction(ActionEvent event) {
         if(objetoTransferido!=null){
             int idCliente = Integer.parseInt(txtIDCliente.getText());
-            objetoTransferido.tranferirObjeto(this.IDCompra,idCliente,this.calcularTotalCompra(),this.listProductosComprados);
+            objetoTransferido.tranferirObjeto(
+                    this.IDCompra,idCliente,this.calcularTotalCompra(),this.listProductosComprados
+            );
             btn_Cancel.fire();
         }
 
