@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="743.0" prefWidth="573.0" stylesheets="@../resources/principal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddTicket">
+<AnchorPane prefHeight="642.0" prefWidth="573.0" stylesheets="@../resources/principal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AddTicket">
    <children>
       <AnchorPane layoutY="1.0" prefHeight="61.0" prefWidth="573.0" style="-fx-background-color: #FF6616;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,7 +42,7 @@
       <JFXTextField fx:id="txtCantidad" focusColor="#ff6616" labelFloat="true" layoutX="288.0" layoutY="179.0" promptText="Cantidad" />
       <JFXButton fx:id="btnArticulo" layoutX="438.0" layoutY="179.0" onAction="#btnArticulo_OnAction" prefHeight="25.0" prefWidth="135.0" text="Añadir articulo" />
       <JFXButton fx:id="btnEliminar" layoutX="438.0" layoutY="204.0" onAction="#btnEliminar_Clic" prefHeight="25.0" prefWidth="135.0" text="Eliminar articulo" />
-      <JFXTreeTableView fx:id="table_resumen_ticket" layoutX="13.0" layoutY="243.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+      <JFXTreeTableView fx:id="table_resumen_ticket" layoutX="13.0" layoutY="243.0" prefHeight="329.0" prefWidth="549.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
          <columns>
             <TreeTableColumn fx:id="column_IDArticulo" prefWidth="74.0" text="ID Atículo" />
             <TreeTableColumn fx:id="column_nombre" prefWidth="223.0" text="Nombre" />
@@ -54,7 +54,24 @@
             <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </JFXTreeTableView>
-      <HBox layoutX="31.0" layoutY="612.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="573.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox layoutX="14.0" layoutY="580.0" prefHeight="50.0" prefWidth="246.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="193.0" text="Total: $" textFill="#5e5e5e">
+               <font>
+                  <Font name="Leelawadee" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTotalCompra" contentDisplay="CENTER" prefHeight="50.0" prefWidth="225.0" text="0.0" textFill="#5e5e5e">
+               <font>
+                  <Font name="Leelawadee" size="28.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="12.0" right="12.0" top="5.0" />
+         </padding>
+      </HBox>
+      <HBox layoutX="31.0" layoutY="612.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="246.0" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="12.0">
          <children>
             <JFXButton fx:id="btn_Add" onAction="#btnAdd_OnAction" prefHeight="60.0" prefWidth="100.0" text="Añadir" />
             <JFXButton fx:id="btn_Cancel" onAction="#btnCancel_OnAction" prefHeight="60.0" prefWidth="100.0" text="Cancelar" />
@@ -63,16 +80,6 @@
             <Insets bottom="5.0" left="12.0" right="12.0" top="5.0" />
          </padding>
       </HBox>
-      <Label layoutX="12.0" layoutY="643.0" prefHeight="50.0" prefWidth="92.0" text="Total: $" textFill="#5e5e5e">
-         <font>
-            <Font name="Leelawadee" size="28.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblTotalCompra" contentDisplay="CENTER" layoutX="104.0" layoutY="643.0" prefHeight="50.0" prefWidth="463.0" text="0.0" textFill="#5e5e5e">
-         <font>
-            <Font name="Leelawadee" size="28.0" />
-         </font>
-      </Label>
       <JFXTextField fx:id="txtIDCliente" focusColor="#ff6616" labelFloat="true" layoutX="423.0" layoutY="109.0" promptText="ID Cliente" />
    </children>
 </AnchorPane>

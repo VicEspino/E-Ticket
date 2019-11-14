@@ -1,7 +1,7 @@
 package controllers;
 
 import SQL.ConexionSQL;
-import SQL.SQLReadProducto;
+import SQL.SQLProducto;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -72,9 +72,6 @@ public class Principal implements Initializable {
     @FXML
     private TreeTableColumn<ResumenArticulo, String> column_total_articulo;
 
-    private final ObservableList<Ticket> listaTickets = FXCollections.observableArrayList();
-    private final ObservableList<ResumenArticulo> listaArticulos = FXCollections.observableArrayList();
-
     @FXML
     private JFXButton btn_Config;
 
@@ -87,7 +84,14 @@ public class Principal implements Initializable {
     @FXML
     private JFXButton btn_Productos;
 
+    @FXML
+    private JFXButton btn_Clientes;
+
     private ConexionSQL conexionSQL = new ConexionSQL();
+
+    private final ObservableList<Ticket> listaTickets = FXCollections.observableArrayList();
+    private final ObservableList<ResumenArticulo> listaArticulos = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -209,7 +213,31 @@ public class Principal implements Initializable {
             AnchorPane vent = loader.load();
             secundary.setScene(new Scene(vent));
             controllers.Productos controller = loader.getController();
-            controller.setProductos(new SQLReadProducto().getProductos());
+            controller.setProductos(new SQLProducto().getProductos());
+
+            secundary.setTitle("Productos");
+            secundary.initOwner(this.btn_Add.getScene().getWindow());
+            secundary.initModality(Modality.WINDOW_MODAL);
+            secundary.resizableProperty().set(false);
+            secundary.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @FXML
+    void btnClientes_OnAction(ActionEvent event) {
+
+        Stage secundary = new Stage();
+        Parent root ;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Clientes_ventana.fxml"));
+        try {
+            AnchorPane vent = loader.load();
+            secundary.setScene(new Scene(vent));
+//            controllers.Productos controller = loader.getController();
+  //          controller.setProductos(new SQLProducto().getProductos());
 
             secundary.setTitle("Productos");
             secundary.initOwner(this.btn_Add.getScene().getWindow());
