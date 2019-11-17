@@ -116,7 +116,7 @@ public class AddTicket implements Initializable {
     }
 
     @FXML
-    void btnArticulo_OnAction(ActionEvent event) {
+    void btnAddArticulo_OnAction(ActionEvent event) {
         int idTicketNuevo = 324;
         int cantidad = Integer.parseInt( txtCantidad.getText() );
         int idProducto = cb_Producto.getSelectionModel().getSelectedIndex();
