@@ -1,7 +1,9 @@
 package controllers;
 
 import SQL.ConexionSQL;
+import SQL.SQLCliente;
 import SQL.SQLProducto;
+import SQL.SQLTicket;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -88,16 +90,20 @@ public class Principal implements Initializable {
     private JFXButton btn_Clientes;
 
     private ConexionSQL conexionSQL = new ConexionSQL();
+    private SQLTicket sqlTicket = new SQLTicket();
 
-    private final ObservableList<Ticket> listaTickets = FXCollections.observableArrayList();
-    private final ObservableList<ResumenArticulo> listaArticulos = FXCollections.observableArrayList();
+    private ObservableList<Ticket> listaTickets;
+    private  ObservableList<ResumenArticulo> listaArticulos ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        //si da null, controlar.
-
         RecursosStatics.connection = conexionSQL.getConexion();
+
+        listaTickets = sqlTicket.listTickets();
+        //si da null, controlar.
+        listaArticulos = FXCollections.observableArrayList();
+
+
 
         column_noTicket.setCellValueFactory(new TreeItemPropertyValueFactory<>("IdTicket"));
         column_IDCliente.setCellValueFactory(new TreeItemPropertyValueFactory<>("IdCliente"));
@@ -170,13 +176,14 @@ public class Principal implements Initializable {
                 public void tranferirObjeto(int IDCompra,int IDCliente,float totalCompra,ObservableList<ResumenArticulo> listProductosComprados) {
                     Calendar calendario = Calendar.getInstance();
 
-
                     Ticket ticketNuevo = new Ticket(
                             IDCompra,IDCliente,
                             new Date(System.currentTimeMillis()),new Time(calendario.getTime().getTime()),
                             totalCompra,listProductosComprados);
-                   // Ticket ticketw = new Ticket(981,589,new Date(156456), new Time(1315), 45.12f);
-                    listaTickets.add(ticketNuevo);
+
+                    if(sqlTicket.anadirTicket(ticketNuevo))
+                        // Ticket ticketw = new Ticket(981,589,new Date(156456), new Time(1315), 45.12f);
+                        listaTickets.add(ticketNuevo);
                 }
             });
 

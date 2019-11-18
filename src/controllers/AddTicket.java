@@ -1,6 +1,7 @@
 package controllers;
 
 import SQL.SQLProducto;
+import SQL.SQLTicket;
 import com.jfoenix.controls.*;
 import interfaces.ITransferirObjeto;
 import javafx.collections.FXCollections;
@@ -75,7 +76,8 @@ public class AddTicket implements Initializable {
 
     private int IDCliente;
 
-    SQLProducto sqlProducto = new SQLProducto();
+    private SQLProducto sqlProducto = new SQLProducto();
+    private SQLTicket sqlTicket = new SQLTicket();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -101,7 +103,8 @@ public class AddTicket implements Initializable {
         //this.list_productos.add(new Producto(3, "Birria de la esquina", 45f));
 
         this.cb_Producto.setItems(crearStrings());
-
+        this.IDCompra = sqlTicket.getLasIndexTicket()+1;
+        this.lblNumeroCompra.setText(IDCompra+"");
 
     }
 
@@ -117,13 +120,14 @@ public class AddTicket implements Initializable {
 
     @FXML
     void btnAddArticulo_OnAction(ActionEvent event) {
-        int idTicketNuevo = 324;
+
+
         int cantidad = Integer.parseInt( txtCantidad.getText() );
         int idProducto = cb_Producto.getSelectionModel().getSelectedIndex();
         Producto productoSelected = list_productos.get(idProducto);
 
 
-        ResumenArticulo resumenArticulo = new ResumenArticulo(idTicketNuevo,productoSelected ,cantidad);
+        ResumenArticulo resumenArticulo = new ResumenArticulo(this.IDCompra,productoSelected ,cantidad);
         listProductosComprados.add(resumenArticulo);
 
         txtCantidad.clear();
@@ -137,9 +141,9 @@ public class AddTicket implements Initializable {
     @FXML
     void btnEliminar_Clic(ActionEvent event) {
 
-        //listProductosComprados.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
-        //this.lblTotalCompra.setText(calcularTotalCompra()  + "");
-        listProductosComprados.get(0).setCantidad(999);
+        listProductosComprados.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
+        this.lblTotalCompra.setText(calcularTotalCompra()  + "");
+        //listProductosComprados.get(0).setCantidad(999);
     }
 
 

@@ -1,0 +1,157 @@
+package SQL;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import models.Cliente;
+import models.Producto;
+import models.ResumenArticulo;
+import models.Ticket;
+import resources.RecursosStatics;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class SQLTicket {
+
+    private PreparedStatement ps;
+    private String query="";
+    private ResultSet rs;
+    private boolean key;
+
+    public boolean anadirTicket(Ticket ticket ){
+        int affectedRows = 0;
+        query = "INSERT INTO eticket.compra VALUES (null,?,?,?,?)";
+
+        try {
+            ps = RecursosStatics.connection.prepareStatement(query);
+          //  ps.setInt(1,ticket.getIdTicket());
+            ps.setDate(1,ticket.getFecha());
+            ps.setTime(2,ticket.getHora());
+            ps.setFloat(3,ticket.getTotalTicket());
+            ps.setInt(4,ticket.getIdCliente());
+
+
+            affectedRows = ps.executeUpdate();
+            ps.close();
+            //last_insert_id()
+            query = "INSERT INTO eticket.compra_has_producto VALUES (?,?,?,?)";
+            for(ResumenArticulo resumenArticulo : ticket.getListProductosComprados()){
+                ps = RecursosStatics.connection.prepareStatement(query);
+
+                ps.setInt(1,resumenArticulo.getIdTicket());
+                ps.setInt(2,resumenArticulo.getIDArticulo());
+                ps.setInt(3,resumenArticulo.getCantidad());
+                ps.setFloat(4,resumenArticulo.getTotalProducto());
+                ps.executeUpdate();
+            }
+            ps.close();
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+
+        return true;
+    }
+
+    public ObservableList<Ticket> listTickets(){
+
+        ObservableList<Ticket> listaTickets = FXCollections.observableArrayList();
+
+
+        try {
+            query = "SELECT * FROM compra";
+            ps = RecursosStatics.connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            Ticket ticketDB;
+
+            while(rs.next()){
+                ticketDB = new Ticket(
+                        rs.getInt(1),
+                        rs.getInt(5),
+                        rs.getDate(2),
+                        rs.getTime(3),
+                        rs.getFloat(4),
+                        null
+                );
+                listaTickets.add(ticketDB);
+            }
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        ObservableList<ResumenArticulo> listaResumenArticulo;
+
+        try
+        {
+            query = "SELECT * FROM compra_has_producto,producto WHERE compra_has_producto.IdProducto = producto.IdProducto AND IdCompra =? ";
+            ResumenArticulo resumenArticulo;
+            for(Ticket ticketActualDB : listaTickets){
+                //se hará la consulta segun el numero de ticket existentes
+                ps = RecursosStatics.connection.prepareStatement(query);
+                ps.setInt(1,ticketActualDB.getIdTicket());
+                rs = ps.executeQuery();
+
+                listaResumenArticulo = FXCollections.observableArrayList();
+                //lee los N articulos
+                while(rs.next()){
+
+                    resumenArticulo = new ResumenArticulo(
+                            rs.getInt(1),
+                            new Producto(rs.getInt(5),rs.getString(6),rs.getInt(7)),
+                            rs.getInt(3)
+                    );
+                    listaResumenArticulo.add(resumenArticulo);
+                }
+                //añade la lista con los articulos a ese ID de Ticket
+                ticketActualDB.setListProductosComprados(listaResumenArticulo);
+
+            }
+
+
+
+            ps.close();
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            System.out.println("error :V");
+        }
+
+
+        return listaTickets;
+    }
+
+    public int getLasIndexTicket(){
+
+        query = " SELECT compra.IdCompra FROM compra ORDER by IdCompra DESC LIMIT 1";
+        try
+        {
+            ps = RecursosStatics.connection.prepareStatement(query);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+
+            ps.close();
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+            System.out.println("error :V");
+        }
+
+        return -1;
+    }
+
+
+}

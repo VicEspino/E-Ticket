@@ -33,7 +33,7 @@
             <Font name="Leelawadee" size="28.0" />
          </font>
       </Label>
-      <Label fx:id="lblNumeroCompra" layoutX="142.0" layoutY="96.0" prefHeight="50.0" prefWidth="231.0" text="6541">
+      <Label fx:id="lblNumeroCompra" layoutX="142.0" layoutY="96.0" prefHeight="50.0" prefWidth="231.0" text="0">
          <font>
             <Font name="Leelawadee" size="28.0" />
          </font>

@@ -13,7 +13,7 @@ public class Ticket extends RecursiveTreeObject<Ticket> {
     private Date fecha;
     private Time hora;
     private float totalTicket;
-    ObservableList<ResumenArticulo> listProductosComprados;
+    private ObservableList<ResumenArticulo> listProductosComprados;
 
     public Ticket(int idTicket, int idCliente, Date fecha, Time hora, float totalTicket, ObservableList<ResumenArticulo> listProductosComprados) {
         this.idTicket = idTicket;
@@ -40,16 +40,16 @@ public class Ticket extends RecursiveTreeObject<Ticket> {
         this.idCliente = idCliente;
     }
 
-    public String getFecha() {
-        return fecha.toString();
+    public Date getFecha() {
+        return fecha;
     }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public String getHora() {
-        return hora.toString();
+    public Time getHora() {
+        return hora;
     }
 
     public void setHora(Time hora) {
