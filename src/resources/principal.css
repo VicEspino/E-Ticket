@@ -9,6 +9,12 @@
     -color-blanco :#FFFFFF;
 }
 
+
+.jfx-text-field > .input-line {
+    -fx-background-color: -boton-color;
+
+}
+
 /*******************************************************************************
      *
      * I will provide this

@@ -33,14 +33,14 @@
             <Font name="Leelawadee" size="28.0" />
          </font>
       </Label>
-      <Label fx:id="lblNumeroCompra" layoutX="142.0" layoutY="96.0" prefHeight="50.0" prefWidth="231.0" text="6541">
+      <Label fx:id="lblNumeroCompra" layoutX="142.0" layoutY="96.0" prefHeight="50.0" prefWidth="231.0" text="0">
          <font>
             <Font name="Leelawadee" size="28.0" />
          </font>
       </Label>
       <JFXComboBox fx:id="cb_Producto" focusColor="#ff6616" labelFloat="true" layoutX="19.0" layoutY="179.0" prefHeight="25.0" prefWidth="246.0" promptText="Producto" AnchorPane.leftAnchor="12.0" />
       <JFXTextField fx:id="txtCantidad" focusColor="#ff6616" labelFloat="true" layoutX="288.0" layoutY="179.0" promptText="Cantidad" />
-      <JFXButton fx:id="btnArticulo" layoutX="438.0" layoutY="179.0" onAction="#btnArticulo_OnAction" prefHeight="25.0" prefWidth="135.0" text="Añadir articulo" />
+      <JFXButton fx:id="btnArticulo" layoutX="438.0" layoutY="179.0" onAction="#btnAddArticulo_OnAction" prefHeight="25.0" prefWidth="135.0" text="Añadir articulo" />
       <JFXButton fx:id="btnEliminar" layoutX="438.0" layoutY="204.0" onAction="#btnEliminar_Clic" prefHeight="25.0" prefWidth="135.0" text="Eliminar articulo" />
       <JFXTreeTableView fx:id="table_resumen_ticket" layoutX="13.0" layoutY="243.0" prefHeight="329.0" prefWidth="549.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
          <columns>

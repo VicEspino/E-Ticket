@@ -207,6 +207,25 @@ public class Principal implements Initializable {
 
     @FXML
     void btnConfig_OnAction(ActionEvent event) {
+        Stage secundary = new Stage();
+        Parent root ;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Config_ventana.fxml"));
+        AnchorPane vent = null;
+        try {
+            vent = loader.load();
+            secundary.setScene(new Scene(vent));
+          //  controllers.Productos controller = loader.getController();
+            //controller.setProductos(new SQLProducto().getProductos());
+
+            secundary.setTitle("Configuración");
+            secundary.initOwner(this.btn_Add.getScene().getWindow());
+            secundary.initModality(Modality.WINDOW_MODAL);
+            secundary.resizableProperty().set(false);
+            secundary.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
