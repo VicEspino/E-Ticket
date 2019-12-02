@@ -1,8 +1,8 @@
-package models;
+package ots.modells;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import java.io.Serializable;
 
-public class Cliente  {
+public class Cliente implements Serializable {
 
     private int idCliente;
     private String nombre;

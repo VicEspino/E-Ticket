@@ -1,5 +1,8 @@
 package  controllers;
 
+import ConexionRed.ClientePrueba;
+import ConexionRed.ConexionCliente;
+import ConexionRed.ConexionServidor;
 import SQL.SQLCliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -83,6 +86,7 @@ public class Clientes implements Initializable {
     @FXML
     void btnAddCliente_OnAction(ActionEvent event) {
 
+       // ConexionCliente conexionCliente = new ConexionCliente();
         if(sqlCliente.anadirCliente(getClienteVentana())){
             listClientes.add(getClienteVentana());
             this.txtNombre.clear();

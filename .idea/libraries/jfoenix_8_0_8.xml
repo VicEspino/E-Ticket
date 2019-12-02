@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/src/resources/jfoenix-8.0.8.jar!/" />
       <root url="jar://$PROJECT_DIR$/src/resources/mysql-connector-java-5.1.47-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/resources/eticket_models.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -14,8 +14,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
-import models.Producto;
 import models.ResumenArticulo;
+import models.Producto;
 import models_tablas.ProductoT;
 import models_tablas.ResumenArticuloT;
 

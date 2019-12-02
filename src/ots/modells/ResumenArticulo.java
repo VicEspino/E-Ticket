@@ -1,8 +1,10 @@
-package models;
+package ots.modells;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+
+import java.io.Serializable;
+
 //Compra has Producto
-public class ResumenArticulo  {
+public class ResumenArticulo implements Serializable {
 
 
     private Producto producto;
@@ -12,7 +14,7 @@ public class ResumenArticulo  {
     private int cantidad;
     private float totalProducto;
 
-    public ResumenArticulo(int idTicket, Producto producto,int cantidad) {
+    public ResumenArticulo(int idTicket, Producto producto, int cantidad) {
         this.producto = producto;
         this.idTicket = idTicket;
         this.cantidad = cantidad;

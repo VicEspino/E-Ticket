@@ -1,14 +1,11 @@
-package models;
+package ots.modells;
 
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.collections.ObservableList;
-import models_tablas.ResumenArticuloT;
-
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
-public class Ticket {
+public class Ticket implements Serializable {
 
     private int idTicket;
     private int idCliente;

@@ -1,5 +1,7 @@
 package controllers;
 
+import ConexionRed.ClientePrueba;
+import ConexionRed.ConexionServidor;
 import SQL.ConexionSQL;
 import SQL.SQLProducto;
 import SQL.SQLTicket;
@@ -102,13 +104,14 @@ public class Principal implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //inicializa conexion a DB para todo el programa
         RecursosStatics.connection = conexionSQL.getConexion();
-
         //listaTickets = sqlTicket.listTickets();
 
         listaTickets = FXCollections.observableArrayList(sqlTicket.listTickets());
         ;
         //si da null, controlar.
         listaArticulos = FXCollections.observableArrayList();
+      //este hilo espera a que el celular le mande su usuario
+        ConexionServidor conexionServidor = new ConexionServidor(listaTickets);
 
 
 
@@ -225,6 +228,7 @@ public class Principal implements Initializable {
     void btnConfig_OnAction(ActionEvent event) {
         Stage secundary = new Stage();
         Parent root ;
+      //  ClientePrueba clientePrueba = new ClientePrueba();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Config_ventana.fxml"));
         AnchorPane vent = null;
