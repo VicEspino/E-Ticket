@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import models.ResumenArticulo;
 import models.Ticket;
 import models_tablas.ResumenArticuloT;
+import models_tablas.TicketT;
 import resources.RecursosStatics;
 
 import java.io.IOException;
@@ -41,22 +42,22 @@ public class Principal implements Initializable {
 
 
     @FXML
-    private JFXTreeTableView<Ticket> table_tickets;
+    private JFXTreeTableView<TicketT> table_tickets;
 
     @FXML
-    private TreeTableColumn<Ticket, String> column_noTicket;
+    private TreeTableColumn<TicketT, String> column_noTicket;
 
     @FXML
-    private TreeTableColumn<Ticket, String> column_IDCliente;
+    private TreeTableColumn<TicketT, String> column_IDCliente;
 
     @FXML
-    private TreeTableColumn<Ticket, String> column_Fecha;
+    private TreeTableColumn<TicketT, String> column_Fecha;
 
     @FXML
-    private TreeTableColumn<Ticket, String> column_hora;
+    private TreeTableColumn<TicketT, String> column_hora;
 
     @FXML
-    private TreeTableColumn<Ticket, String> column_total;
+    private TreeTableColumn<TicketT, String> column_total;
 
     @FXML
     private JFXTreeTableView<ResumenArticuloT> table_resumen_ticket;
@@ -94,7 +95,7 @@ public class Principal implements Initializable {
     private ConexionSQL conexionSQL = new ConexionSQL();
     private SQLTicket sqlTicket = new SQLTicket();
 
-    private ObservableList<Ticket> listaTickets;
+    private ObservableList<TicketT> listaTickets;
     private  ObservableList<ResumenArticuloT> listaArticulos ;
 
     @Override
@@ -120,7 +121,7 @@ public class Principal implements Initializable {
 
         //Ticket ticket = new Ticket(1,12,new Date(156189), new Time(12315), 485.12f);
         //listaTickets.add(ticket);
-        TreeItem<Ticket> root = new RecursiveTreeItem<>(listaTickets, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
+        TreeItem<TicketT> root = new RecursiveTreeItem<>(listaTickets, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
         table_tickets.setRoot(root);
         table_tickets.setShowRoot(false);
 
@@ -141,7 +142,7 @@ public class Principal implements Initializable {
 
         table_tickets.setRowFactory((param -> {
 
-            JFXTreeTableRow<Ticket> row = new JFXTreeTableRow<>();
+            JFXTreeTableRow<TicketT> row = new JFXTreeTableRow<>();
 
             row.setOnMouseClicked(event -> {
                 if(! row.isEmpty() && event.getButton()== MouseButton.PRIMARY /*&& event.getClickCount() == 2*/) {
@@ -193,7 +194,7 @@ public class Principal implements Initializable {
 
                     if(sqlTicket.anadirTicket(ticketNuevo))
                         // Ticket ticketw = new Ticket(981,589,new Date(156456), new Time(1315), 45.12f);
-                        listaTickets.add(ticketNuevo);
+                        listaTickets.add(new TicketT(ticketNuevo));
                 }
             });
 

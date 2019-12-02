@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
-public class Ticket extends RecursiveTreeObject<Ticket> {
+public class Ticket {
 
     private int idTicket;
     private int idCliente;

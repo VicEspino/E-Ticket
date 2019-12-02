@@ -7,6 +7,7 @@ import models.Producto;
 import models.ResumenArticulo;
 import models.Ticket;
 import models_tablas.ResumenArticuloT;
+import models_tablas.TicketT;
 import resources.RecursosStatics;
 
 import java.sql.PreparedStatement;
@@ -60,9 +61,9 @@ public class SQLTicket {
         return true;
     }
 
-    public ArrayList<Ticket> listTickets(){
+    public ArrayList<TicketT> listTickets(){
 
-        ArrayList<Ticket> listaTickets =new ArrayList<>();// FXCollections.observableArrayList();
+        ArrayList<TicketT> listaTickets =new ArrayList<>();// FXCollections.observableArrayList();
 
 
         try {
@@ -80,7 +81,7 @@ public class SQLTicket {
                         rs.getFloat(4),
                         null
                 );
-                listaTickets.add(ticketDB);
+                listaTickets.add(new TicketT(ticketDB));
             }
 
 
@@ -97,7 +98,7 @@ public class SQLTicket {
         {
             query = "SELECT * FROM compra_has_producto,producto WHERE compra_has_producto.IdProducto = producto.IdProducto AND IdCompra =? ";
             ResumenArticulo resumenArticulo;
-            for(Ticket ticketActualDB : listaTickets){
+            for(TicketT ticketActualDB : listaTickets){
                 //se hará la consulta segun el numero de ticket existentes
                 ps = RecursosStatics.connection.prepareStatement(query);
                 ps.setInt(1,ticketActualDB.getIdTicket());
