@@ -15,9 +15,9 @@ public class Ticket {
     private Date fecha;
     private Time hora;
     private float totalTicket;
-    private ArrayList<ResumenArticuloT> listProductosComprados;
+    private ArrayList<ResumenArticulo> listProductosComprados;
 
-    public Ticket(int idTicket, int idCliente, Date fecha, Time hora, float totalTicket, ArrayList<ResumenArticuloT> listProductosComprados) {
+    public Ticket(int idTicket, int idCliente, Date fecha, Time hora, float totalTicket, ArrayList<ResumenArticulo> listProductosComprados) {
         this.idTicket = idTicket;
         this.idCliente = idCliente;
         this.fecha = fecha;
@@ -66,11 +66,11 @@ public class Ticket {
         this.totalTicket = totalTicket;
     }
 
-    public ArrayList<ResumenArticuloT> getListProductosComprados() {
+    public ArrayList<ResumenArticulo> getListProductosComprados() {
         return listProductosComprados;
     }
 
-    public void setListProductosComprados(ArrayList<ResumenArticuloT> listProductosComprados) {
+    public void setListProductosComprados(ArrayList<ResumenArticulo> listProductosComprados) {
         this.listProductosComprados = listProductosComprados;
     }
 }

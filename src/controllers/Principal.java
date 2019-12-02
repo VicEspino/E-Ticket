@@ -187,10 +187,15 @@ public class Principal implements Initializable {
                 public void tranferirObjeto(int IDCompra,int IDCliente,float totalCompra,ArrayList<ResumenArticuloT> listProductosComprados) {
                     Calendar calendario = Calendar.getInstance();
 
+                    ArrayList<ResumenArticulo> listaTemp = new ArrayList<>();
+                    for(ResumenArticuloT resumenArticuloTActual : listProductosComprados){
+                        listaTemp.add(resumenArticuloTActual.getResumenArticulo());
+                    }
+
                     Ticket ticketNuevo = new Ticket(
                             IDCompra,IDCliente,
                             new Date(System.currentTimeMillis()),new Time(calendario.getTime().getTime()),
-                            totalCompra,listProductosComprados);
+                            totalCompra,listaTemp);
 
                     if(sqlTicket.anadirTicket(ticketNuevo))
                         // Ticket ticketw = new Ticket(981,589,new Date(156456), new Time(1315), 45.12f);

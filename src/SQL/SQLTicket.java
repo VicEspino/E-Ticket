@@ -39,7 +39,7 @@ public class SQLTicket {
             ps.close();
             //last_insert_id()
             query = "INSERT INTO eticket.compra_has_producto VALUES (?,?,?,?)";
-            for(ResumenArticuloT resumenArticulo : ticket.getListProductosComprados()){
+            for(ResumenArticulo resumenArticulo : ticket.getListProductosComprados()){
                 ps = RecursosStatics.connection.prepareStatement(query);
 
                 ps.setInt(1,resumenArticulo.getIdTicket());

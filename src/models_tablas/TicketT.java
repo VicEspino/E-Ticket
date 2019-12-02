@@ -1,6 +1,7 @@
 package models_tablas;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import models.ResumenArticulo;
 import models.Ticket;
 
 import java.sql.Date;
@@ -64,10 +65,18 @@ public class TicketT extends RecursiveTreeObject<TicketT> {
     }
 
     public ArrayList<ResumenArticuloT> getListProductosComprados() {
-        return this.ticket.getListProductosComprados();
+        ArrayList<ResumenArticuloT> listaTemp = new ArrayList<>();
+        for(ResumenArticulo resumenActual : this.ticket.getListProductosComprados())
+            listaTemp.add(new ResumenArticuloT(resumenActual));
+        return listaTemp;
     }
 
     public void setListProductosComprados(ArrayList<ResumenArticuloT> listProductosComprados) {
-        this.ticket.setListProductosComprados(listProductosComprados);
+        ArrayList<ResumenArticulo> listaTemp = new ArrayList<>();
+
+        for(ResumenArticuloT resumenActual :  listProductosComprados)
+            listaTemp.add(resumenActual.getResumenArticulo());
+
+        this.ticket.setListProductosComprados(listaTemp);
     }
 }

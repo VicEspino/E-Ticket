@@ -56,4 +56,12 @@ public class ResumenArticuloT extends RecursiveTreeObject<ResumenArticuloT> {
     public void setProducto(Producto producto) {
         this.resumenArticulo.setProducto(producto);
     }
+
+    public ResumenArticulo getResumenArticulo() {
+        return resumenArticulo;
+    }
+
+    public void setResumenArticulo(ResumenArticulo resumenArticulo) {
+        this.resumenArticulo = resumenArticulo;
+    }
 }
