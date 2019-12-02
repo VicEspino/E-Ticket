@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Ticket extends RecursiveTreeObject<Ticket> {
 
@@ -13,9 +14,9 @@ public class Ticket extends RecursiveTreeObject<Ticket> {
     private Date fecha;
     private Time hora;
     private float totalTicket;
-    private ObservableList<ResumenArticulo> listProductosComprados;
+    private ArrayList<ResumenArticulo> listProductosComprados;
 
-    public Ticket(int idTicket, int idCliente, Date fecha, Time hora, float totalTicket, ObservableList<ResumenArticulo> listProductosComprados) {
+    public Ticket(int idTicket, int idCliente, Date fecha, Time hora, float totalTicket, ArrayList<ResumenArticulo> listProductosComprados) {
         this.idTicket = idTicket;
         this.idCliente = idCliente;
         this.fecha = fecha;
@@ -64,11 +65,11 @@ public class Ticket extends RecursiveTreeObject<Ticket> {
         this.totalTicket = totalTicket;
     }
 
-    public ObservableList<ResumenArticulo> getListProductosComprados() {
+    public ArrayList<ResumenArticulo> getListProductosComprados() {
         return listProductosComprados;
     }
 
-    public void setListProductosComprados(ObservableList<ResumenArticulo> listProductosComprados) {
+    public void setListProductosComprados(ArrayList<ResumenArticulo> listProductosComprados) {
         this.listProductosComprados = listProductosComprados;
     }
 }

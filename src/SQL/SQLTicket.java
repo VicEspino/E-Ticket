@@ -11,6 +11,7 @@ import resources.RecursosStatics;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SQLTicket {
 
@@ -58,9 +59,9 @@ public class SQLTicket {
         return true;
     }
 
-    public ObservableList<Ticket> listTickets(){
+    public ArrayList<Ticket> listTickets(){
 
-        ObservableList<Ticket> listaTickets = FXCollections.observableArrayList();
+        ArrayList<Ticket> listaTickets =new ArrayList<>();// FXCollections.observableArrayList();
 
 
         try {
@@ -89,7 +90,7 @@ public class SQLTicket {
         }
 
 
-        ObservableList<ResumenArticulo> listaResumenArticulo;
+        ArrayList<ResumenArticulo> listaResumenArticulo;
 
         try
         {
@@ -101,7 +102,8 @@ public class SQLTicket {
                 ps.setInt(1,ticketActualDB.getIdTicket());
                 rs = ps.executeQuery();
 
-                listaResumenArticulo = FXCollections.observableArrayList();
+                //listaResumenArticulo = FXCollections.observableArrayList();
+                listaResumenArticulo = new ArrayList<>();
                 //lee los N articulos
                 while(rs.next()){
 

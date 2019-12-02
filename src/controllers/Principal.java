@@ -1,7 +1,6 @@
 package controllers;
 
 import SQL.ConexionSQL;
-import SQL.SQLCliente;
 import SQL.SQLProducto;
 import SQL.SQLTicket;
 import com.jfoenix.controls.JFXButton;
@@ -32,7 +31,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class Principal implements Initializable {
@@ -97,9 +98,13 @@ public class Principal implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //inicializa conexion a DB para todo el programa
         RecursosStatics.connection = conexionSQL.getConexion();
 
-        listaTickets = sqlTicket.listTickets();
+        //listaTickets = sqlTicket.listTickets();
+
+        listaTickets = FXCollections.observableArrayList(sqlTicket.listTickets());
+        ;
         //si da null, controlar.
         listaArticulos = FXCollections.observableArrayList();
 
@@ -139,7 +144,11 @@ public class Principal implements Initializable {
 
             row.setOnMouseClicked(event -> {
                 if(! row.isEmpty() && event.getButton()== MouseButton.PRIMARY /*&& event.getClickCount() == 2*/) {
-                    TreeItem<ResumenArticulo> raizRow = new RecursiveTreeItem<>(row.getTreeItem().getValue().getListProductosComprados(), (recursiveTreeObject) -> recursiveTreeObject.getChildren());
+                    TreeItem<ResumenArticulo> raizRow = new RecursiveTreeItem<>(
+                            FXCollections.observableArrayList(
+                                    row.getTreeItem().getValue().getListProductosComprados()
+                            ),
+                            (recursiveTreeObject) -> recursiveTreeObject.getChildren());
                     table_resumen_ticket.setRoot(raizRow);
                 }
             });
@@ -173,7 +182,7 @@ public class Principal implements Initializable {
 
             controller.setTransferirObjeto(new ITransferirObjeto() {
                 @Override
-                public void tranferirObjeto(int IDCompra,int IDCliente,float totalCompra,ObservableList<ResumenArticulo> listProductosComprados) {
+                public void tranferirObjeto(int IDCompra,int IDCliente,float totalCompra,ArrayList<ResumenArticulo> listProductosComprados) {
                     Calendar calendario = Calendar.getInstance();
 
                     Ticket ticketNuevo = new Ticket(

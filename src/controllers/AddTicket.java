@@ -18,6 +18,8 @@ import models.Producto;
 import models.ResumenArticulo;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddTicket implements Initializable {
@@ -69,8 +71,9 @@ public class AddTicket implements Initializable {
     private ITransferirObjeto objetoTransferido;
 
     private ObservableList<Producto> list_productos ;
+    private ObservableList<ResumenArticulo> list_resumenArticulos;
 
-    private ObservableList<ResumenArticulo> listProductosComprados;
+    //private ArrayList<ResumenArticulo> listProductosComprados;
 
     private int IDCompra;
 
@@ -82,8 +85,13 @@ public class AddTicket implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        listProductosComprados = FXCollections.observableArrayList();
-        TreeItem<ResumenArticulo> root = new RecursiveTreeItem<>(listProductosComprados, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
+        //listProductosComprados = FXCollections.observableArrayList();
+       // listProductosComprados = new ArrayList<>();
+        list_resumenArticulos = FXCollections.observableArrayList(/*listProductosComprados*/);
+        TreeItem<ResumenArticulo> root = new RecursiveTreeItem<>(
+                list_resumenArticulos,
+                (recursiveTreeObject) -> recursiveTreeObject.getChildren()
+        );
         table_resumen_ticket.setRoot(root);
         table_resumen_ticket.setShowRoot(false);
 
@@ -128,7 +136,8 @@ public class AddTicket implements Initializable {
 
 
         ResumenArticulo resumenArticulo = new ResumenArticulo(this.IDCompra,productoSelected ,cantidad);
-        listProductosComprados.add(resumenArticulo);
+        //listProductosComprados.add(resumenArticulo);
+        list_resumenArticulos.add(resumenArticulo);
 
         txtCantidad.clear();
         cb_Producto.getSelectionModel().clearSelection();
@@ -141,7 +150,8 @@ public class AddTicket implements Initializable {
     @FXML
     void btnEliminar_Clic(ActionEvent event) {
 
-        listProductosComprados.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
+        //listProductosComprados.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
+        list_resumenArticulos.remove(table_resumen_ticket.getSelectionModel().getSelectedItem().getValue());
         this.lblTotalCompra.setText(calcularTotalCompra()  + "");
         //listProductosComprados.get(0).setCantidad(999);
     }
@@ -149,10 +159,18 @@ public class AddTicket implements Initializable {
 
     @FXML
     void btnAdd_OnAction(ActionEvent event) {
+
+        Object[] objects = list_resumenArticulos.toArray();
+        //List<ResumenArticulo> resumenArticulos = new List<ResumenArticulo>(objects);
+
+        ArrayList<ResumenArticulo> lista_resumen_articulos = new ArrayList<ResumenArticulo>();
+        for(ResumenArticulo resumenArticuloActual:list_resumenArticulos){
+            lista_resumen_articulos.add(resumenArticuloActual);
+        }
         if(objetoTransferido!=null){
             int idCliente = Integer.parseInt(txtIDCliente.getText());
             objetoTransferido.tranferirObjeto(
-                    this.IDCompra,idCliente,this.calcularTotalCompra(),this.listProductosComprados
+                    this.IDCompra,idCliente,this.calcularTotalCompra(), lista_resumen_articulos/*this.listProductosComprados*/
             );
             btn_Cancel.fire();
         }
@@ -173,7 +191,7 @@ public class AddTicket implements Initializable {
 
     public float calcularTotalCompra(){
         float total = 0;
-        for(ResumenArticulo resumenArticulo : listProductosComprados){
+        for(ResumenArticulo resumenArticulo : list_resumenArticulos){
             total += resumenArticulo.getTotalProducto();
         }
 
