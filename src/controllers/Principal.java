@@ -25,6 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.ResumenArticulo;
 import models.Ticket;
+import models_tablas.ResumenArticuloT;
 import resources.RecursosStatics;
 
 import java.io.IOException;
@@ -58,22 +59,22 @@ public class Principal implements Initializable {
     private TreeTableColumn<Ticket, String> column_total;
 
     @FXML
-    private JFXTreeTableView<ResumenArticulo> table_resumen_ticket;
+    private JFXTreeTableView<ResumenArticuloT> table_resumen_ticket;
 
     @FXML
-    private TreeTableColumn<ResumenArticulo, String> column_IDArticulo;
+    private TreeTableColumn<ResumenArticuloT, String> column_IDArticulo;
 
     @FXML
-    private TreeTableColumn<ResumenArticulo, String> column_nombre;
+    private TreeTableColumn<ResumenArticuloT, String> column_nombre;
 
     @FXML
-    private TreeTableColumn<ResumenArticulo, String> column_cantidad;
+    private TreeTableColumn<ResumenArticuloT, String> column_cantidad;
 
     @FXML
-    private TreeTableColumn<ResumenArticulo, String> column_individual;
+    private TreeTableColumn<ResumenArticuloT, String> column_individual;
 
     @FXML
-    private TreeTableColumn<ResumenArticulo, String> column_total_articulo;
+    private TreeTableColumn<ResumenArticuloT, String> column_total_articulo;
 
     @FXML
     private JFXButton btn_Config;
@@ -94,7 +95,7 @@ public class Principal implements Initializable {
     private SQLTicket sqlTicket = new SQLTicket();
 
     private ObservableList<Ticket> listaTickets;
-    private  ObservableList<ResumenArticulo> listaArticulos ;
+    private  ObservableList<ResumenArticuloT> listaArticulos ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -132,7 +133,7 @@ public class Principal implements Initializable {
         column_total_articulo.setCellValueFactory(new TreeItemPropertyValueFactory<>("TotalProducto"));
 
 
-        TreeItem<ResumenArticulo> root2 = new RecursiveTreeItem<>(listaArticulos, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
+        TreeItem<ResumenArticuloT> root2 = new RecursiveTreeItem<>(listaArticulos, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
         table_resumen_ticket.setRoot(root2);
         table_resumen_ticket.setShowRoot(false);
 
@@ -144,7 +145,7 @@ public class Principal implements Initializable {
 
             row.setOnMouseClicked(event -> {
                 if(! row.isEmpty() && event.getButton()== MouseButton.PRIMARY /*&& event.getClickCount() == 2*/) {
-                    TreeItem<ResumenArticulo> raizRow = new RecursiveTreeItem<>(
+                    TreeItem<ResumenArticuloT> raizRow = new RecursiveTreeItem<>(
                             FXCollections.observableArrayList(
                                     row.getTreeItem().getValue().getListProductosComprados()
                             ),
@@ -182,7 +183,7 @@ public class Principal implements Initializable {
 
             controller.setTransferirObjeto(new ITransferirObjeto() {
                 @Override
-                public void tranferirObjeto(int IDCompra,int IDCliente,float totalCompra,ArrayList<ResumenArticulo> listProductosComprados) {
+                public void tranferirObjeto(int IDCompra,int IDCliente,float totalCompra,ArrayList<ResumenArticuloT> listProductosComprados) {
                     Calendar calendario = Calendar.getInstance();
 
                     Ticket ticketNuevo = new Ticket(

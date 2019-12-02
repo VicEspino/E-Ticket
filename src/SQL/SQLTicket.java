@@ -6,6 +6,7 @@ import models.Cliente;
 import models.Producto;
 import models.ResumenArticulo;
 import models.Ticket;
+import models_tablas.ResumenArticuloT;
 import resources.RecursosStatics;
 
 import java.sql.PreparedStatement;
@@ -37,7 +38,7 @@ public class SQLTicket {
             ps.close();
             //last_insert_id()
             query = "INSERT INTO eticket.compra_has_producto VALUES (?,?,?,?)";
-            for(ResumenArticulo resumenArticulo : ticket.getListProductosComprados()){
+            for(ResumenArticuloT resumenArticulo : ticket.getListProductosComprados()){
                 ps = RecursosStatics.connection.prepareStatement(query);
 
                 ps.setInt(1,resumenArticulo.getIdTicket());
@@ -90,7 +91,7 @@ public class SQLTicket {
         }
 
 
-        ArrayList<ResumenArticulo> listaResumenArticulo;
+        ArrayList<ResumenArticuloT> listaResumenArticulo;
 
         try
         {
@@ -112,7 +113,7 @@ public class SQLTicket {
                             new Producto(rs.getInt(5),rs.getString(6),rs.getInt(7)),
                             rs.getInt(3)
                     );
-                    listaResumenArticulo.add(resumenArticulo);
+                    listaResumenArticulo.add(new ResumenArticuloT(resumenArticulo));
                 }
                 //añade la lista con los articulos a ese ID de Ticket
                 ticketActualDB.setListProductosComprados(listaResumenArticulo);

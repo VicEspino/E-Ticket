@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import models.Producto;
 import models.ResumenArticulo;
 import models_tablas.ProductoT;
+import models_tablas.ResumenArticuloT;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class AddTicket implements Initializable {
     private JFXButton btnEliminar;
 
     @FXML
-    private JFXTreeTableView<ResumenArticulo> table_resumen_ticket;
+    private JFXTreeTableView<ResumenArticuloT> table_resumen_ticket;
 
     @FXML
     private TreeTableColumn<Producto, String> column_IDArticulo;
@@ -72,7 +73,7 @@ public class AddTicket implements Initializable {
     private ITransferirObjeto objetoTransferido;
 
     private ObservableList<ProductoT> list_productos ;
-    private ObservableList<ResumenArticulo> list_resumenArticulos;
+    private ObservableList<ResumenArticuloT> list_resumenArticulos;
 
     //private ArrayList<ResumenArticulo> listProductosComprados;
 
@@ -89,7 +90,7 @@ public class AddTicket implements Initializable {
         //listProductosComprados = FXCollections.observableArrayList();
        // listProductosComprados = new ArrayList<>();
         list_resumenArticulos = FXCollections.observableArrayList(/*listProductosComprados*/);
-        TreeItem<ResumenArticulo> root = new RecursiveTreeItem<>(
+        TreeItem<ResumenArticuloT> root = new RecursiveTreeItem<>(
                 list_resumenArticulos,
                 (recursiveTreeObject) -> recursiveTreeObject.getChildren()
         );
@@ -137,7 +138,9 @@ public class AddTicket implements Initializable {
         ProductoT productoSelected = list_productos.get(idProducto);
 
 
-        ResumenArticulo resumenArticulo = new ResumenArticulo(this.IDCompra,productoSelected.getProducto() ,cantidad);
+        ResumenArticuloT resumenArticulo = new ResumenArticuloT(
+                new ResumenArticulo(this.IDCompra,productoSelected.getProducto() ,cantidad)
+        );
         //listProductosComprados.add(resumenArticulo);
         list_resumenArticulos.add(resumenArticulo);
 
@@ -165,8 +168,8 @@ public class AddTicket implements Initializable {
         Object[] objects = list_resumenArticulos.toArray();
         //List<ResumenArticulo> resumenArticulos = new List<ResumenArticulo>(objects);
 
-        ArrayList<ResumenArticulo> lista_resumen_articulos = new ArrayList<ResumenArticulo>();
-        for(ResumenArticulo resumenArticuloActual:list_resumenArticulos){
+        ArrayList<ResumenArticuloT> lista_resumen_articulos = new ArrayList<ResumenArticuloT>();
+        for(ResumenArticuloT resumenArticuloActual:list_resumenArticulos){
             lista_resumen_articulos.add(resumenArticuloActual);
         }
         if(objetoTransferido!=null){
@@ -193,7 +196,7 @@ public class AddTicket implements Initializable {
 
     public float calcularTotalCompra(){
         float total = 0;
-        for(ResumenArticulo resumenArticulo : list_resumenArticulos){
+        for(ResumenArticuloT resumenArticulo : list_resumenArticulos){
             total += resumenArticulo.getTotalProducto();
         }
 
