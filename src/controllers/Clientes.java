@@ -57,7 +57,6 @@ public class Clientes implements Initializable {
 
     private ObservableList<Cliente> listClientes;
 
-
     private SQLCliente sqlCliente;
 
     @Override
@@ -65,7 +64,7 @@ public class Clientes implements Initializable {
 
         sqlCliente = new SQLCliente();
         //listClientes = FXCollections.observableArrayList();
-        listClientes = sqlCliente.getClientes();
+        listClientes = FXCollections.observableArrayList(sqlCliente.getClientes());
         column_IDCliente.setCellValueFactory(new TreeItemPropertyValueFactory<>("IdCliente"));
         column_nombre.setCellValueFactory(new TreeItemPropertyValueFactory<>("Nombre"));
         column_Email.setCellValueFactory(new TreeItemPropertyValueFactory<>("Email"));

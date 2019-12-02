@@ -10,6 +10,7 @@ import resources.RecursosStatics;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SQLCliente {
 
@@ -59,9 +60,9 @@ public class SQLCliente {
     }
 
 
-    public ObservableList<Cliente> getClientes(){
+    public ArrayList<Cliente> getClientes(){
 
-        ObservableList<Cliente> listCliente =  FXCollections.observableArrayList();
+        ArrayList<Cliente> listCliente =  new ArrayList<>();//FXCollections.observableArrayList();
         query="SELECT * from cliente ORDER by IdCliente ASC";
         String direccion;
         try
