@@ -248,7 +248,8 @@ public class Principal implements Initializable {
             AnchorPane vent = loader.load();
             secundary.setScene(new Scene(vent));
             controllers.Productos controller = loader.getController();
-            controller.setProductos(new SQLProducto().getProductos());
+            controller.setProductos(
+                    FXCollections.observableArrayList( new SQLProducto().getProductos()));
 
             secundary.setTitle("Productos");
             secundary.initOwner(this.btn_Add.getScene().getWindow());

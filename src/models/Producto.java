@@ -2,7 +2,7 @@ package models;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-public class Producto extends RecursiveTreeObject<Producto> {
+public class Producto {
 
     private int idProducto;
     private String nombreProducto;
@@ -13,7 +13,6 @@ public class Producto extends RecursiveTreeObject<Producto> {
         this.nombreProducto = nombreProducto;
         this.precio = precio;
     }
-
 
     public int getIdProducto() {
         return idProducto;

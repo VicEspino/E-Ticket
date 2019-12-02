@@ -3,12 +3,14 @@ package SQL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Producto;
+import models_tablas.ProductoT;
 import resources.RecursosStatics;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SQLProducto {
 
@@ -17,10 +19,11 @@ public class SQLProducto {
     ResultSet rs;
     boolean key;
 
-    public boolean anadirProducto(Producto producto){
+    public boolean anadirProducto(ProductoT productoT){
         int affectedRows = 0;
         query = "INSERT INTO producto VALUES (?,?,?)";
 
+        Producto producto = productoT.getProducto();
         try {
             ps = RecursosStatics.connection.prepareStatement(query);
             ps.setInt(1,producto.getIdProducto());
@@ -56,9 +59,9 @@ public class SQLProducto {
 
 
 
-    public ObservableList<Producto> getProductos()
+    public ArrayList<ProductoT> getProductos()
     {
-        ObservableList<Producto> listProductos =  FXCollections.observableArrayList();
+        ArrayList<ProductoT> listProductos = new ArrayList<>();// FXCollections.observableArrayList();
         query="SELECT * from producto ORDER by IdProducto ASC";
         String direccion;
         try
@@ -73,7 +76,7 @@ public class SQLProducto {
                         rs.getString(2),
                         rs.getFloat(3)
                 );
-                listProductos.add(producto);
+                listProductos.add(new ProductoT(producto));
 
 
             }

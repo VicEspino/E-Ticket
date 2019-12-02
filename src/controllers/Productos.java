@@ -14,6 +14,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import models.Producto;
+import models_tablas.ProductoT;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,42 +34,20 @@ public class Productos implements Initializable {
     private JFXButton btnEliminar;
 
     @FXML
-    private JFXTreeTableView<Producto> table_productos;
+    private JFXTreeTableView<ProductoT> table_productos;
 
     @FXML
-    private TreeTableColumn<Producto, String> column_IDArticulo;
+    private TreeTableColumn<ProductoT, String> column_IDArticulo;
 
     @FXML
-    private TreeTableColumn<Producto, String> column_nombre;
+    private TreeTableColumn<ProductoT, String> column_nombre;
 
     @FXML
-    private TreeTableColumn<Producto, String> column_individual;
+    private TreeTableColumn<ProductoT, String> column_individual;
 
     ConexionSQL conexionSQL;
-    private ObservableList<Producto> listaProductos;
+    private ObservableList<ProductoT> listaProductos;
     private SQLProducto sqlProducto = new SQLProducto();
-
-    @FXML
-    void btnArticulo_OnAction(ActionEvent event) {
-        Producto productoNuevo =
-                new Producto(sqlProducto.getLastIndexTable()+1, txtNombreProducto.getText(), Float.parseFloat(txtPrecioProducto.getText()));
-
-        if(sqlProducto.anadirProducto(productoNuevo)) {
-            listaProductos.add(productoNuevo);
-            this.txtNombreProducto.clear();
-            this.txtPrecioProducto.clear();
-        }
-    }
-
-    @FXML
-    void btnEliminar_Clic(ActionEvent event) {
-        Producto productoSnapshot =  table_productos.getSelectionModel().getSelectedItem().getValue();
-        int idSnapshotSelected = productoSnapshot.getIdProducto();
-
-        if(sqlProducto.borrarProducto(idSnapshotSelected))
-            listaProductos.remove(productoSnapshot);
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,9 +60,32 @@ public class Productos implements Initializable {
 
     }
 
-    public void setProductos(ObservableList<Producto> listaProductos){
+    @FXML
+    void btnArticulo_OnAction(ActionEvent event) {
+        ProductoT productoNuevo =new ProductoT(
+                new Producto(sqlProducto.getLastIndexTable()+1, txtNombreProducto.getText(), Float.parseFloat(txtPrecioProducto.getText()))
+        );
+
+        if(sqlProducto.anadirProducto(productoNuevo)) {
+            listaProductos.add(productoNuevo);
+            this.txtNombreProducto.clear();
+            this.txtPrecioProducto.clear();
+        }
+    }
+
+    @FXML
+    void btnEliminar_Clic(ActionEvent event) {
+        ProductoT productoSnapshot =  table_productos.getSelectionModel().getSelectedItem().getValue();
+        int idSnapshotSelected = productoSnapshot.getIdProducto();
+
+        if(sqlProducto.borrarProducto(idSnapshotSelected))
+            listaProductos.remove(productoSnapshot);
+
+    }
+
+    public void setProductos(ObservableList<ProductoT> listaProductos){
         this.listaProductos = listaProductos;
-        TreeItem<Producto> root = new RecursiveTreeItem<>(listaProductos, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
+        TreeItem<ProductoT> root = new RecursiveTreeItem<>(listaProductos, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
         table_productos.setRoot(root);
         //probar true
         table_productos.setShowRoot(false);

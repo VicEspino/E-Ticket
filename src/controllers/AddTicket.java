@@ -16,6 +16,7 @@ import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.Stage;
 import models.Producto;
 import models.ResumenArticulo;
+import models_tablas.ProductoT;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class AddTicket implements Initializable {
 
     private ITransferirObjeto objetoTransferido;
 
-    private ObservableList<Producto> list_productos ;
+    private ObservableList<ProductoT> list_productos ;
     private ObservableList<ResumenArticulo> list_resumenArticulos;
 
     //private ArrayList<ResumenArticulo> listProductosComprados;
@@ -105,7 +106,8 @@ public class AddTicket implements Initializable {
 
 
 
-        this.list_productos =  sqlProducto.getProductos();//FXCollections.observableArrayList();
+        //this.list_productos =  sqlProducto.getProductos();//FXCollections.observableArrayList();
+        this.list_productos = FXCollections.observableArrayList( sqlProducto.getProductos());//;
         //this.list_productos.add(new Producto(1, "Sincronizada", 25f));
         //this.list_productos.add(new Producto(2, "Sincronizada carne Hamburguesa", 35f));
         //this.list_productos.add(new Producto(3, "Birria de la esquina", 45f));
@@ -119,7 +121,7 @@ public class AddTicket implements Initializable {
     private ObservableList<String> crearStrings() {
         ObservableList<String> listaIDNombre = FXCollections.observableArrayList();
 
-        for(Producto producto : list_productos){
+        for(ProductoT producto : list_productos){
             listaIDNombre.add(producto.getIdProducto() + " " + producto.getNombreProducto() );
         }
 
@@ -132,10 +134,10 @@ public class AddTicket implements Initializable {
 
         int cantidad = Integer.parseInt( txtCantidad.getText() );
         int idProducto = cb_Producto.getSelectionModel().getSelectedIndex();
-        Producto productoSelected = list_productos.get(idProducto);
+        ProductoT productoSelected = list_productos.get(idProducto);
 
 
-        ResumenArticulo resumenArticulo = new ResumenArticulo(this.IDCompra,productoSelected ,cantidad);
+        ResumenArticulo resumenArticulo = new ResumenArticulo(this.IDCompra,productoSelected.getProducto() ,cantidad);
         //listProductosComprados.add(resumenArticulo);
         list_resumenArticulos.add(resumenArticulo);
 
