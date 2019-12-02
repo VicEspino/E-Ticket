@@ -14,6 +14,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import models.Cliente;
+import models_tablas.ClienteT;
 
 import java.net.URL;
 import java.util.Observable;
@@ -35,19 +36,19 @@ public class Clientes implements Initializable {
     private JFXTextField txtEmail;
 
     @FXML
-    private JFXTreeTableView<Cliente> table_productos;
+    private JFXTreeTableView<ClienteT> table_productos;
 
     @FXML
-    private TreeTableColumn<Cliente, String> column_IDCliente;
+    private TreeTableColumn<ClienteT, String> column_IDCliente;
 
     @FXML
-    private TreeTableColumn<Cliente, String> column_nombre;
+    private TreeTableColumn<ClienteT, String> column_nombre;
 
     @FXML
-    private TreeTableColumn<Cliente, String> column_Email;
+    private TreeTableColumn<ClienteT, String> column_Email;
 
     @FXML
-    private TreeTableColumn<Cliente, String> column_Contrasena;
+    private TreeTableColumn<ClienteT, String> column_Contrasena;
 
     @FXML
     private JFXTextField txtContra;
@@ -55,7 +56,7 @@ public class Clientes implements Initializable {
     @FXML
     private JFXTextField txtIdCliente;
 
-    private ObservableList<Cliente> listClientes;
+    private ObservableList<ClienteT> listClientes;
 
     private SQLCliente sqlCliente;
 
@@ -70,7 +71,7 @@ public class Clientes implements Initializable {
         column_Email.setCellValueFactory(new TreeItemPropertyValueFactory<>("Email"));
         column_Contrasena.setCellValueFactory(new TreeItemPropertyValueFactory<>("Contrasena"));
 
-        TreeItem<Cliente> root = new RecursiveTreeItem<>(listClientes, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
+        TreeItem<ClienteT> root = new RecursiveTreeItem<>(listClientes, (recursiveTreeObject) -> recursiveTreeObject.getChildren());
         table_productos.setRoot(root);
         table_productos.setShowRoot(false);
 
@@ -99,7 +100,7 @@ public class Clientes implements Initializable {
         int idABorrar = 0;
 
 
-        Cliente m = table_productos.getSelectionModel().getSelectedItem().getValue();
+        ClienteT m = table_productos.getSelectionModel().getSelectedItem().getValue();
 
         if (m != null) {
             idABorrar = m.getIdCliente();
@@ -115,7 +116,7 @@ public class Clientes implements Initializable {
 
     }
 
-    private Cliente getClienteVentana(){
+    private ClienteT getClienteVentana(){
         Cliente clienteNuevo =
                 new Cliente(
                         Integer.parseInt(this.txtIdCliente.getText()),
@@ -123,7 +124,7 @@ public class Clientes implements Initializable {
                         this.txtEmail.getText(),
                         this.txtContra.getText());
 
-        return  clienteNuevo;
+        return  new ClienteT(clienteNuevo);
 
     }
 

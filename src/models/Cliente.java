@@ -2,7 +2,7 @@ package models;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
-public class Cliente extends RecursiveTreeObject<Cliente> {
+public class Cliente  {
 
     private int idCliente;
     private String nombre;

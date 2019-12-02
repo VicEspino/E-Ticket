@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Cliente;
 import models.Producto;
+import models_tablas.ClienteT;
 import resources.RecursosStatics;
 
 import java.sql.PreparedStatement;
@@ -19,7 +20,7 @@ public class SQLCliente {
     ResultSet rs;
     boolean key;
 
-    public boolean anadirCliente(Cliente cliente ){
+    public boolean anadirCliente(ClienteT cliente ){
         int affectedRows = 0;
         query = "INSERT INTO cliente VALUES (?,?,?,?)";
 
@@ -60,9 +61,9 @@ public class SQLCliente {
     }
 
 
-    public ArrayList<Cliente> getClientes(){
+    public ArrayList<ClienteT> getClientes(){
 
-        ArrayList<Cliente> listCliente =  new ArrayList<>();//FXCollections.observableArrayList();
+        ArrayList<ClienteT> listCliente =  new ArrayList<>();//FXCollections.observableArrayList();
         query="SELECT * from cliente ORDER by IdCliente ASC";
         String direccion;
         try
@@ -77,7 +78,7 @@ public class SQLCliente {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4));
-                listCliente.add(cliente);
+                listCliente.add(new ClienteT(cliente));
 
 
             }
