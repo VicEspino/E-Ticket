@@ -56,7 +56,7 @@ public class ConexionServidor {
 
         ArrayList<Ticket> listaTicketCliente = new ArrayList<>();
         for(TicketT ticketT:listaTickets){
-            if(ticketT.getIdTicket()==Integer.parseInt(numCliente))
+            if(ticketT.getIdCliente()==Integer.parseInt(numCliente))
                 listaTicketCliente.add(ticketT.getTicket());
         }
 

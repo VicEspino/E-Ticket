@@ -22,6 +22,7 @@ public class ConexionCliente   {
             objectOutputStream.writeObject(listaTicketCliente);
             objectOutputStream.close();
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
