@@ -6,10 +6,7 @@ import models_tablas.TicketT;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.net.*;
 import java.util.ArrayList;
 
 public class ConexionServidor {
@@ -23,13 +20,18 @@ public class ConexionServidor {
          Thread miHilo = new Thread(new Runnable() {
             @Override
             public void run() {
-
-
-
                 try {
                     serverSocket = new ServerSocket(1399);
+                    serverSocket.setReuseAddress(true);
+                } catch (SocketException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
                     while(true){
                         //esperara una conexión
+
                         Socket socket = serverSocket.accept();
                         DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
                         String data = dataInputStream.readUTF();
@@ -37,9 +39,14 @@ public class ConexionServidor {
                         String s = remoteSocketAddress.toString();
                         String ipCelular = s.substring(1,s.indexOf(':'));
                         socket.close();
-                        enviarListaTickets(ipCelular,data.split(";")[0]);
+                        if( !enviarListaTickets(ipCelular,data.split(";")[0])){
+                            continue;
+                        }
                         System.out.println(data);
-                       // Toast.makeText(context, data, Toast.LENGTH_LONG).show();
+                      //  serverSocket.close();
+
+                        //para terminar este hilo
+                      //  break;
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -51,7 +58,7 @@ public class ConexionServidor {
 
     }
 
-    private void enviarListaTickets(String ipCelular,String numCliente) {
+    private boolean enviarListaTickets(String ipCelular,String numCliente) {
 
 
         ArrayList<Ticket> listaTicketCliente = new ArrayList<>();
@@ -61,6 +68,7 @@ public class ConexionServidor {
         }
 
         ConexionCliente conexionCliente = new ConexionCliente(ipCelular,listaTicketCliente);
+        return conexionCliente.enviar();
 
     }
 
