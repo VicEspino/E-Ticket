@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="587.0" prefWidth="573.0" stylesheets="@../resources/principal.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Productos">
+   <children>
+      <AnchorPane prefHeight="61.0" prefWidth="573.0" style="-fx-background-color: #FF6616;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="27.0" layoutY="9.0" text="Productos" textFill="WHITE" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="Leelawadee" size="50.0" />
+               </font>
+            </Label>
+            <Label layoutX="948.0" layoutY="9.0" text="Vic" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="9.0">
+               <font>
+                  <Font name="Leelawadee" size="50.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <JFXTextField fx:id="txtNombreProducto" focusColor="#ff6616" labelFloat="true" layoutX="12.0" layoutY="114.0" promptText="Nombre producto" />
+      <JFXTextField fx:id="txtPrecioProducto" focusColor="#ff6616" labelFloat="true" layoutX="163.0" layoutY="114.0" promptText="Precio individual" />
+      <JFXButton fx:id="btnArticulo" layoutX="422.0" layoutY="114.0" onAction="#btnArticulo_OnAction" prefHeight="25.0" prefWidth="135.0" text="Añadir articulo" />
+      <JFXButton fx:id="btnEliminar" layoutX="422.0" layoutY="139.0" onAction="#btnEliminar_Clic" prefHeight="25.0" prefWidth="135.0" text="Eliminar articulo" />
+      <JFXTreeTableView fx:id="table_productos" layoutX="23.0" layoutY="253.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0">
+         <columns>
+            <TreeTableColumn fx:id="column_IDArticulo" minWidth="0.0" text="ID Atículo" />
+            <TreeTableColumn fx:id="column_nombre" prefWidth="342.0" text="Nombre" />
+            <TreeTableColumn fx:id="column_individual" prefWidth="125.0" text="\$ Individual" />
+         </columns>
+         <columnResizePolicy>
+            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </JFXTreeTableView>
+   </children>
+</AnchorPane>

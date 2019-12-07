@@ -1,7 +1,7 @@
 package controllers;
 
-import SQL.ConexionSQL;
-import SQL.SQLProducto;
+import SQLServer.SQLServerProducto;
+import SQLServer.ConexionSQLServer;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -45,9 +45,10 @@ public class Productos implements Initializable {
     @FXML
     private TreeTableColumn<ProductoT, String> column_individual;
 
-    ConexionSQL conexionSQL;
+    //ConexionMySQL conexionMySQL;
+    private ConexionSQLServer conexionSQLServer;
     private ObservableList<ProductoT> listaProductos;
-    private SQLProducto sqlProducto = new SQLProducto();
+    private SQLServerProducto sqlServerProducto = new SQLServerProducto();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -63,10 +64,10 @@ public class Productos implements Initializable {
     @FXML
     void btnArticulo_OnAction(ActionEvent event) {
         ProductoT productoNuevo =new ProductoT(
-                new Producto(sqlProducto.getLastIndexTable()+1, txtNombreProducto.getText(), Float.parseFloat(txtPrecioProducto.getText()))
+                new Producto(sqlServerProducto.getLastIndexTable() + 1, txtNombreProducto.getText(), Float.parseFloat(txtPrecioProducto.getText()))
         );
 
-        if(sqlProducto.anadirProducto(productoNuevo)) {
+        if (sqlServerProducto.anadirProducto(productoNuevo)) {
             listaProductos.add(productoNuevo);
             this.txtNombreProducto.clear();
             this.txtPrecioProducto.clear();
@@ -78,7 +79,7 @@ public class Productos implements Initializable {
         ProductoT productoSnapshot =  table_productos.getSelectionModel().getSelectedItem().getValue();
         int idSnapshotSelected = productoSnapshot.getIdProducto();
 
-        if(sqlProducto.borrarProducto(idSnapshotSelected))
+        if (sqlServerProducto.borrarProducto(idSnapshotSelected))
             listaProductos.remove(productoSnapshot);
 
     }

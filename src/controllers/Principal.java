@@ -1,10 +1,11 @@
 package controllers;
 
-import ConexionRed.ClientePrueba;
 import ConexionRed.ConexionServidor;
-import SQL.ConexionSQL;
+import SQL.ConexionMySQL;
 import SQL.SQLProducto;
 import SQL.SQLTicket;
+import SQLServer.ConexionSQLServer;
+import SQLServer.SQLServerTicket;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableRow;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -37,7 +38,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class Principal implements Initializable {
@@ -94,8 +94,10 @@ public class Principal implements Initializable {
     @FXML
     private JFXButton btn_Clientes;
 
-    private ConexionSQL conexionSQL = new ConexionSQL();
-    private SQLTicket sqlTicket = new SQLTicket();
+    private ConexionMySQL conexionMySQL;//= new ConexionMySQL();
+    private ConexionSQLServer conexionSQLServer;
+    // private SQLTicket sqlTicket = new SQLTicket();
+    SQLServerTicket sqlServerTicket = new SQLServerTicket();
 
     private ObservableList<TicketT> listaTickets;
     private  ObservableList<ResumenArticuloT> listaArticulos ;
@@ -103,10 +105,13 @@ public class Principal implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //inicializa conexion a DB para todo el programa
-        RecursosStatics.connection = conexionSQL.getConexion();
+        //this.conexionMySQL = new ConexionMySQL();
+        this.conexionSQLServer = new ConexionSQLServer();
+        //RecursosStatics.connection = conexionMySQL.getConexion();
+        RecursosStatics.connection = conexionSQLServer.getConexion();
         //listaTickets = sqlTicket.listTickets();
 
-        listaTickets = FXCollections.observableArrayList(sqlTicket.listTickets());
+        listaTickets = FXCollections.observableArrayList(sqlServerTicket.listTickets());
         ;
         //si da null, controlar.
         listaArticulos = FXCollections.observableArrayList();
@@ -200,7 +205,7 @@ public class Principal implements Initializable {
                             new Date(System.currentTimeMillis()),new Time(calendario.getTime().getTime()),
                             totalCompra,listaTemp);
 
-                    if(sqlTicket.anadirTicket(ticketNuevo))
+                    if (sqlServerTicket.anadirTicket(ticketNuevo))
                         // Ticket ticketw = new Ticket(981,589,new Date(156456), new Time(1315), 45.12f);
                         listaTickets.add(new TicketT(ticketNuevo));
                 }

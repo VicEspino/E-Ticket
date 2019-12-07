@@ -1,9 +1,8 @@
 package  controllers;
 
-import ConexionRed.ClientePrueba;
-import ConexionRed.ConexionCliente;
-import ConexionRed.ConexionServidor;
+
 import SQL.SQLCliente;
+import SQLServer.SQLServerCliente;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -61,14 +60,16 @@ public class Clientes implements Initializable {
 
     private ObservableList<ClienteT> listClientes;
 
-    private SQLCliente sqlCliente;
+    //private SQLCliente sqlCliente;
+    private SQLServerCliente sqlServerCliente;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        sqlCliente = new SQLCliente();
+        sqlServerCliente = new SQLServerCliente();
         //listClientes = FXCollections.observableArrayList();
-        listClientes = FXCollections.observableArrayList(sqlCliente.getClientes());
+        listClientes = FXCollections.observableArrayList(sqlServerCliente.getClientes());
         column_IDCliente.setCellValueFactory(new TreeItemPropertyValueFactory<>("IdCliente"));
         column_nombre.setCellValueFactory(new TreeItemPropertyValueFactory<>("Nombre"));
         column_Email.setCellValueFactory(new TreeItemPropertyValueFactory<>("Email"));
@@ -87,7 +88,7 @@ public class Clientes implements Initializable {
     void btnAddCliente_OnAction(ActionEvent event) {
 
        // ConexionCliente conexionCliente = new ConexionCliente();
-        if(sqlCliente.anadirCliente(getClienteVentana())){
+        if (sqlServerCliente.anadirCliente(getClienteVentana())) {
             listClientes.add(getClienteVentana());
             this.txtNombre.clear();
             this.txtEmail.clear();
@@ -110,7 +111,7 @@ public class Clientes implements Initializable {
             idABorrar = m.getIdCliente();
 
 
-            if (this.sqlCliente.borrarProducto(idABorrar)) {
+            if (this.sqlServerCliente.borrarProducto(idABorrar)) {
                 listClientes.remove(table_productos.getSelectionModel().getSelectedItem().getValue());
                 setNewIndexCliente();
             }
@@ -133,7 +134,7 @@ public class Clientes implements Initializable {
     }
 
     private void setNewIndexCliente(){
-        int idNuevoReg = sqlCliente.getLastIndex();
+        int idNuevoReg = sqlServerCliente.getLastIndex();
         //this.txtIdCliente.setText((sqlCliente.getLastIndex()+1)+"");
         this.txtIdCliente.setText((idNuevoReg==-1?1:idNuevoReg+1 )+ "");
         this.txtIdCliente.getText();

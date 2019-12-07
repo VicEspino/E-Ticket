@@ -1,7 +1,8 @@
 package controllers;
 
-import SQL.SQLProducto;
-import SQL.SQLTicket;
+
+import SQLServer.SQLServerProducto;
+import SQLServer.SQLServerTicket;
 import com.jfoenix.controls.*;
 import interfaces.ITransferirObjeto;
 import javafx.collections.FXCollections;
@@ -81,8 +82,12 @@ public class AddTicket implements Initializable {
 
     private int IDCliente;
 
-    private SQLProducto sqlProducto = new SQLProducto();
-    private SQLTicket sqlTicket = new SQLTicket();
+    //private SQLProducto sqlProducto = new SQLProducto();
+    //private SQLTicket sqlTicket = new SQLTicket();
+
+
+    private SQLServerProducto sqlServerProducto = new SQLServerProducto();
+    private SQLServerTicket sqlServerTicket = new SQLServerTicket();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,13 +113,13 @@ public class AddTicket implements Initializable {
 
 
         //this.list_productos =  sqlProducto.getProductos();//FXCollections.observableArrayList();
-        this.list_productos = FXCollections.observableArrayList( sqlProducto.getProductos());//;
+        this.list_productos = FXCollections.observableArrayList(sqlServerProducto.getProductos());//;
         //this.list_productos.add(new Producto(1, "Sincronizada", 25f));
         //this.list_productos.add(new Producto(2, "Sincronizada carne Hamburguesa", 35f));
         //this.list_productos.add(new Producto(3, "Birria de la esquina", 45f));
 
         this.cb_Producto.setItems(crearStrings());
-        this.IDCompra = sqlTicket.getLasIndexTicket()+1;
+        this.IDCompra = sqlServerTicket.getLasIndexTicket() + 1;
         this.lblNumeroCompra.setText(IDCompra+"");
 
     }

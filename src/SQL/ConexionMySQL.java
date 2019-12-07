@@ -9,15 +9,15 @@ import java.sql.SQLException;
 import java.sql.Connection;
 
 
-public class ConexionSQL
+public class ConexionMySQL
 {
 
     Connection connection=null;
 
-    public ConexionSQL() {
+    public ConexionMySQL() {
     }
 
-    public ConexionSQL(Connection connection) {
+    public ConexionMySQL(Connection connection) {
         this.connection = connection;
     }
 
